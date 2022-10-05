@@ -18,6 +18,10 @@ class Product extends Model
         //'product_picture'
     ];
 
+    protected $hidden = [
+        
+    ];
+
     public function artisan() {
         return $this->belongsTo(Artisan::class);
     }
