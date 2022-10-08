@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtisanController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Middleware\Middleware;
@@ -32,6 +33,9 @@ route::POST('/login', [LoginController::class, 'login']);
 //image enpoint
 route::POST('upload', [ArtisanController::class, 'upload']);
 
+//artisan search endpoint
+route::GET('request', [SearchController::class, 'search']);
+
 //protected endpoints
 route::group(['middleware' => ['auth:sanctum']],function()
 {
@@ -57,4 +61,7 @@ route::GET('users',[RegisterController::class, 'index']);
 route::GET('users/{id}', [RegisterController::class, 'show']);
 route::PUT('users/{id}', [RegisteredController::class, 'update']);
 route::DELETE ('users/{id}', [RegisteredController::class, 'destroy']);
+
+//Logout Endpoint
+route::post('logout', [LoginController::class, 'logout']);
 });

@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         $artisan = $request->artisan_id;
         $product = $request->product_name;
-        $category = $request->category;
+        $category = $request->category_id;
         $description = $request->description;
         $amount = $request->amount;
        // $image = $request->product_picture;
@@ -38,7 +38,7 @@ class ProductController extends Controller
         $validator = validator::make($request->all(), [
             'artisan_id' => 'required|exists:artisans,id',
             'product_name' => ['required', 'string', 'min:3', 'max:20'],
-            'category' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
             'description' => ['required', 'string', 'min:10', 'max:500'],
             'amount' => ['required'],
             //'product_picture' => ['nullable', 'string', 'max:1999']
@@ -54,7 +54,7 @@ class ProductController extends Controller
         $product = Product::create([
             'artisan_id' => $artisan,
             'product_name' => $product,
-            'category' => $category,
+            'category_id' => $category,
             'description' => $description,
             'amount' => $amount,
             //'image' => $image
@@ -98,7 +98,7 @@ class ProductController extends Controller
     {
         $artisan = $request->artisan;
         $product = $request->product_name;
-        $category = $request->category;
+        $category = $request->category_id;
         $description = $request->description;
         $amount = $request->amount;
        // $image = $request->image;
@@ -106,7 +106,7 @@ class ProductController extends Controller
         $validator = validator::make($request->all([
             'artisan_id' => ['required','exists:artisan,id'],
             'product_name' => ['required', 'string', 'min:3', 'max:20'],
-            'category' => ['required', 'string',],
+            'category_id' => ['required', 'exists:categories,id'],
             'description' => ['required', 'text', 'min:10', 'max:500'],
             'amount' => ['required'],
            // 'image' => ['nullable', 'string', 'max:1999']
@@ -124,7 +124,7 @@ class ProductController extends Controller
         $update->update([
             'artisan_id' => $artisan,
             'product_name' => $product,
-            'category' => $category,
+            'category_id' => $category,
             'description' => $description,
             'amount' => $amount,
            // 'image' => $image

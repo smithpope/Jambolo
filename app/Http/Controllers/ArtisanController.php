@@ -38,7 +38,7 @@ class ArtisanController extends Controller
         $state = $request->state;
         $city = $request->city;
         $address = $request->address;
-        $category = $request->category;
+        $category = $request->category_id;
         $association = $request->association;
         $bankname = $request->bank_name;
         $accountnumber = $request->account_number;
@@ -55,7 +55,7 @@ class ArtisanController extends Controller
             'state' => ['required', 'string'],
             'city' => ['required', 'string'],
             'address' => ['required', 'string', 'max:255'],
-            'category' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
             'association' => ['required', 'string'],
             'bank_name' => ['required', 'string', 'min:3'],
             'account_number' => ['required', 'numeric', 'min_digits:10', 'max_digits:10'],
@@ -80,7 +80,7 @@ class ArtisanController extends Controller
             'state' => $state,
             'city' => $city,
             'address' => $address,
-            'category' => $category,
+            'category_id' => $category,
             'association' => $association,
             'bank_name' => $bankname,
             'account_number' => $accountnumber,
@@ -124,7 +124,7 @@ class ArtisanController extends Controller
         $state = $request->state;
         $city = $request->city;
         $address = $request->address;
-        $category = $request->category;
+        $category = $request->category_id;
         $association = $request->association;
         $bankname = $request->bank_name;
         $accountnumber = $request->account_number;
@@ -143,7 +143,7 @@ class ArtisanController extends Controller
             'state' => ['required', 'string'],
             'city' => ['required', 'string'],
             'address' => ['required', 'string', 'max:255'],
-            'category' => ['required', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
             'association' => ['required', 'string'],
             'bank_name' => ['required', 'string', 'min:3'],
             'account_number' => ['required', 'numeric', 'min_digits:10', 'max_digits:10', 'digits:10'],
@@ -167,7 +167,7 @@ class ArtisanController extends Controller
             'state' => $state,
             'city' => $city,
             'address' => $address,
-            'category' => $category,
+            'category_id' => $category,
             'association' => $association,
             'bank_name' => $bankname,
             'account_number' => $accountnumber,

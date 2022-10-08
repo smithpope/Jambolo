@@ -25,8 +25,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('city');
             $table->string('address');
-            $table->enum('category',['Entatainment', 'Planner', 'Electrician', 
-            'Furniture', 'Promotions']);
+            $table->string('category_id');
             $table->enum('association',['EKO NASHCO', 'LASSMA', 'LSETF', 'NARAP', 'PCFA', 
             'PECAN', 'Plumbers Association', 'Independent Operators', 'LSETF Graduates']);
             $table->string('bank_name');

@@ -19,7 +19,7 @@ class Artisan extends Model
         'state',
         'city',
         'address',
-        'category',
+        'category_id',
         'association',
         'bank_name',
         'account_number',
@@ -29,5 +29,9 @@ class Artisan extends Model
 
     public function product(){
         return $this->hasMany(Product::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 }

@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'artisan_id',
         'product_name',
-        'category',
+        'category_id',
         'description',
         'amount',
         //'product_picture'
@@ -24,5 +24,9 @@ class Product extends Model
 
     public function artisan() {
         return $this->belongsTo(Artisan::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 }
