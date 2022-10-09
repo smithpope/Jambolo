@@ -19,16 +19,24 @@ class LoginController extends Controller
 
        //return response($request->all());
 
-        $validate = Validator::make($request->all(),[
-            'email' => ['required', 'string', 'unique:users,email'],
+        $validator = Validator::make($request->all(),[
+            'email' => ['required', 'string', 'exists:users,email'],
             'password' => ['required', 'string', 'min:8']
         ]);
 
-        //return response($request->all());
+        if ($validator->fails()){
+            return response([
+                'error' => 'Invalid Entry',
+                'info' => $validator->errors()
+            ]);
+        }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+       // return response($request->all());
+       $validate = $request->all();
 
-        if (!$user || !Hash::check($request['password'], $user->password))
+        $user = User::where('email', $validate['email'])->firstOrFail();
+
+        if (!$user || !Hash::check($validate['password'], $user->password))
         {
             return response([
                 'msg' => 'incorrect username or password',
