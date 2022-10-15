@@ -24,20 +24,26 @@ class SearchController extends Controller
             ], 404);
         }
 
-        $artisansearch = Artisan::with(['category'])->
-        where('category_id', $category->id)
-        ->where('address', 'like', "%$address%")->get();
+        /*$artisansearch = Artisan::with(['category'])->where('category_id', $category->id)
+        ->where('address', 'like', "%$address%")->get();*/
 
-        /*if ($artisansearch->empty()){
-            $artisansearch = Artisan::with(['category'])->where('category_id', $category->id)
-            ->where('city', 'like', "%$city%")->get();
-        }*/
+        $search = Artisan::with(['category']);
 
-       // $artisan = $artisansearch->get();
+        if ($request->address){
+            $search->where('address', 'like', "%$request->keyword%");
+        }
+
+        if ($request->category){
+            $search->whereHas('category', function($query) use($request){
+                $query->where('category_id', $category->id);
+            });
+        }
+
+        $artisanrequest = $search->get();
 
         return response()->json([
             'msg' => 'Artisan Found',
-            'Data' => $artisansearch
+            'Data' => $artisanrequest
         ], 200);
     }
 }
